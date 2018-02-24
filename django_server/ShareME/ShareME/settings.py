@@ -25,12 +25,13 @@ SECRET_KEY = 'g^9m_jj3ix-k_5c0sybrq98feonwqjoq0nguukuu195f7%-277'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'ShareME_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
