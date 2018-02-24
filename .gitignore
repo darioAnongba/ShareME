@@ -1,4 +1,8 @@
 # Created by .ignore support plugin (hsz.mobi)
 node_modules
 .idea
+*.pyc
+__pycache__/
 django_server/django_env
+django_server/ShareME/ShareME_app/migrations
+django_server/ShareME/db.sqlite3
