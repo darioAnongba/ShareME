@@ -6,6 +6,15 @@ class Profile(models.Model):
     address = models.TextField()
     name = models.TextField()
 
+    @property
+    def as_dict(self):
+        to_return = {
+            "address": self.address,
+            "name": self.name
+        }
+
+        return to_return
+
     def __str__(self):
         return "%s-%s" % (self.address, self.name)
 
