@@ -13,42 +13,45 @@ import './css/pure-min.css'
 import './App.css'
 
 class App extends Component {
-  render() {
-    const OnlyAuthLinks = VisibleOnlyAuth(() =>
-      <span>
-        <li className="pure-menu-item">
+    render() {
+        const OnlyAuthLinks = VisibleOnlyAuth(() =>
+                <span>
+                    <li className="pure-menu-item">
           <Link to="/dashboard" className="pure-menu-link">Dashboard</Link>
         </li>
         <li className="pure-menu-item">
           <Link to="/profile" className="pure-menu-link">Profile</Link>
         </li>
+          <li className="pure-menu-item">
+          <Link to="/wallet" className="pure-menu-link">Wallet</Link>
+        </li>
         <LogoutButtonContainer />
-      </span>
-    )
+                </span>
+        );
 
-    const OnlyGuestLinks = HiddenOnlyAuth(() =>
-      <span>
+        const OnlyGuestLinks = HiddenOnlyAuth(() =>
+                <span>
         <li className="pure-menu-item">
           <Link to="/signup" className="pure-menu-link">Sign Up</Link>
         </li>
         <LoginButtonContainer />
       </span>
-    )
+        );
 
-    return (
-      <div className="App">
-        <nav className="navbar pure-menu pure-menu-horizontal">
-          <ul className="pure-menu-list navbar-right">
-            <OnlyGuestLinks />
-            <OnlyAuthLinks />
-          </ul>
-          <Link to="/" className="pure-menu-heading pure-menu-link">Truffle Box</Link>
-        </nav>
+        return (
+            <div className="App">
+                <nav className="navbar pure-menu pure-menu-horizontal">
+                    <ul className="pure-menu-list navbar-right">
+                        <OnlyGuestLinks />
+                        <OnlyAuthLinks />
+                    </ul>
+                    <Link to="/" className="pure-menu-heading pure-menu-link">ShareME - Decentralized Car Sharing</Link>
+                </nav>
 
-        {this.props.children}
-      </div>
-    );
-  }
+                {this.props.children}
+            </div>
+        );
+    }
 }
 
 export default App
