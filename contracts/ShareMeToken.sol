@@ -6,8 +6,8 @@ contract ShareMeToken is ERC827Token {
 
     string public name = 'ShareMeToken';
     string public symbol = 'TT';
-    uint public decimals = 8;
-    uint public INITIAL_SUPPLY = 500000000;
+    uint public decimals = 2;
+    uint public INITIAL_SUPPLY = 5e7;
 
     function ShareMeToken() public {
         totalSupply_ = INITIAL_SUPPLY;

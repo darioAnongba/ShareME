@@ -1,13 +1,10 @@
-pragma solidity ^0.4.2;
+pragma solidity ^0.4.17;
 
 import './zeppelin/lifecycle/Killable.sol';
+import './SharedStructs.sol';
 
 contract Authentication is Killable {
-  struct User {
-    bytes32 name;
-  }
-
-  mapping (address => User) private users;
+  mapping (address => SharedStructs.User) public users;
 
   uint private id; // Stores user id temporarily
 
