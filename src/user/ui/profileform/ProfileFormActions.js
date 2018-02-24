@@ -1,18 +1,17 @@
 import AuthenticationContract from '../../../../build/contracts/Authentication.json'
-import { browserHistory } from 'react-router'
 import store from '../../../store'
 
 const contract = require('truffle-contract')
 
-export const USER_LOGGED_IN = 'USER_LOGGED_IN'
-function userLoggedIn(user) {
+export const USER_UPDATED = 'USER_UPDATED'
+function userUpdated(user) {
   return {
-    type: USER_LOGGED_IN,
+    type: USER_UPDATED,
     payload: user
   }
 }
 
-export function loginUser() {
+export function updateUser(name) {
   let web3 = store.getState().web3.web3Instance
 
   // Double-check web3's status.
@@ -37,29 +36,16 @@ export function loginUser() {
           authenticationInstance = instance
 
           // Attempt to login user.
-          authenticationInstance.login({from: coinbase})
+          authenticationInstance.update(name, {from: coinbase})
           .then(function(result) {
-            // If no error, login user.
-            var userName = web3.toUtf8(result)
+            // If no error, update user.
 
-            dispatch(userLoggedIn({"name": userName}))
+            dispatch(userUpdated({"name": name}))
 
-            // Used a manual redirect here as opposed to a wrapper.
-            // This way, once logged in a user can still access the home page.
-            var currentLocation = browserHistory.getCurrentLocation()
-
-            if ('redirect' in currentLocation.query)
-            {
-              return browserHistory.push(decodeURIComponent(currentLocation.query.redirect))
-            }
-
-            return browserHistory.push('/dashboard')
+            return alert('Name updated!')
           })
           .catch(function(result) {
-            // If error, go to signup page.
-            console.error('Wallet ' + coinbase + ' does not have an account!')
-
-            return browserHistory.push('/signup')
+            // If error...
           })
         })
       })
