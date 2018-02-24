@@ -16,7 +16,7 @@ class Car(models.Model):
     brand = models.TextField()
     plate_number = models.TextField()
     nb_seats = models.IntegerField()
-    nb_kilometers = models.IntegerField()
+    nb_kms = models.IntegerField()
     picture_url = models.URLField()
     pick_up_location = models.TextField()
 
@@ -26,7 +26,7 @@ class Car(models.Model):
             "brand": self.brand,
             "plate_number": self.plate_number,
             "nb_seats": self.nb_seats,
-            "nb_kilometers": self.nb_kilometers,
+            "nb_kms": self.nb_kms,
             "picture_url": self.picture_url,
             "pick_up_location": self.pick_up_location
         }
