@@ -15,7 +15,6 @@ class WalletForm extends Component {
     }
 
     handleSubmit(event) {
-        console.log(this.state);
         event.preventDefault();
         this.props.onTransferFormSubmit(this.state.transferAddress, this.state.transferAmount)
     }
@@ -39,7 +38,7 @@ class WalletForm extends Component {
 
                     <input
                         id="transferAmount"
-                        type="text"
+                        type="number"
                         value={this.state.transferAmount}
                         name="transferAmount"
                         onChange={this.onInputChange.bind(this)}
@@ -47,8 +46,6 @@ class WalletForm extends Component {
                     <span className="pure-form-message">This is a required field.</span>
 
                     <br />
-
-                    <span>{this.state.transferAddress}</span>
 
                     <button type="submit" className="pure-button pure-button-primary">Send</button>
                 </fieldset>

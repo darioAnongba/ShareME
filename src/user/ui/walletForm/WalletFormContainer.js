@@ -12,6 +12,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onTransferFormSubmit: (address, amount) => {
+          console.log(address, amount);
             dispatch(transferToUser(address, amount))
         },
         fetchBalances: () => {

@@ -1,46 +1,46 @@
-import AuthenticationContract from '../../../../build/contracts/Authentication.json'
-import {loginUser} from '../loginbutton/LoginButtonActions'
+import TokenContract from '../../../../build/contracts/ShareMeToken.json'
 import store from '../../../store'
 
 const contract = require('truffle-contract');
 
-export function transferToUser(name, amount) {
+export function transferToUser(toAddress, amount) {
     let web3 = store.getState().web3.web3Instance;
 
     // Double-check web3's status.
     if (typeof web3 !== 'undefined') {
 
         return function(dispatch) {
-            // Using truffle-contract we create the authentication object.
-            const authentication = contract(AuthenticationContract)
-            authentication.setProvider(web3.currentProvider)
+            const token = contract(TokenContract);
+            token.setProvider(web3.currentProvider);
 
-            // Declaring this for later so we can chain functions on Authentication.
-            var authenticationInstance;
+            let tokenInstance;
 
             // Get current ethereum wallet.
-            web3.eth.getCoinbase((error, coinbase) => {
+            web3.eth.getAccounts((error, accounts) => {
                 // Log errors, if any.
                 if (error) {
                     console.error(error);
                 }
 
-                authentication.deployed().then(function(instance) {
-                    authenticationInstance = instance
+                token.deployed().then(function(instance) {
+                    tokenInstance = instance;
 
-                    // Attempt to sign up user.
-                    authenticationInstance.signup(name, {from: coinbase})
-                        .then(function(result) {
-                            // If no error, login user.
-                            return dispatch(loginUser())
-                        })
-                        .catch(function(result) {
-                            // If error...
-                        })
-                })
+                    return tokenInstance.transfer(toAddress, amount, {from: accounts[0]})
+                }).then(function (result) {
+                    alert('Transfer successful !');
+                    return {
+                        type: 'TEST'
+                    }
+                }).catch(function (err) {
+                    console.log(err.message);
+                });
             })
         }
     } else {
         console.error('Web3 is not initialized.');
     }
+}
+
+export function getBalances() {
+
 }
