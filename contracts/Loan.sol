@@ -26,8 +26,8 @@ contract Loan {
         return false;
     }
 
-    function getPlates() public view returns (bytes32[]) {
-        return ownedPlates[msg.sender];
+    function getPlatesOf(address addr) public view returns (bytes32[]) {
+        return ownedPlates[addr];
     }
 
     function createBooking(bytes32 plateNumber, uint startTime, uint endTime, uint price) public returns (bool) {        

@@ -24,6 +24,13 @@ const userReducer = (state = initialState, action) => {
         })
     }
 
+    if (action.type === 'GET_PLATES_SUCCESS')
+    {
+        return Object.assign({}, state, {
+            plates: action.payload
+        })
+    }
+
     return state
 };
 

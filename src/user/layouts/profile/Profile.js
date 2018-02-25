@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ProfileFormContainer from '../../ui/profileform/ProfileFormContainer'
 import NewCarFormContainer from '../../ui/newCarForm/NewCarFormContainer'
+import ListCarsContainer from '../../ui/listCars/ListCarsContainer'
 
 class Profile extends Component {
     render() {
@@ -12,9 +13,9 @@ class Profile extends Component {
                         <p>Edit your account details here.</p>
                         <ProfileFormContainer />
 
-
                         <h1>My Cars</h1>
                         <p>Manage your cars</p>
+                        <ListCarsContainer />
 
                         <h1>Add a Car</h1>
                         <NewCarFormContainer />
