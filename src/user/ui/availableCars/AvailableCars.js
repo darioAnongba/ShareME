@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import CarListing from './CarListing'
 
 class AvailableCars extends Component {
     constructor(props) {
@@ -14,7 +15,9 @@ class AvailableCars extends Component {
     render() {
         return(
             <ul>
-                <li>{this.props.availableCars}</li>
+                {this.props.availableCars && this.props.availableCars.map(function (car, index) {
+                    return <CarListing car={car} key={index}/>
+                })}
             </ul>
         )
     }

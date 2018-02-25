@@ -27,15 +27,12 @@ class WalletForm extends Component {
         return(
             <form className="pure-form pure-form-stacked" onSubmit={this.handleSubmit.bind(this)}>
                 <fieldset>
-                    <h4>Balance</h4>
                     <strong>Balance</strong>: <span id="SMTBalance">{this.props.balance}</span> SMT<br/><br/>
                     <input id="transferAddress"
                            type="text"
                            value={this.state.transferAddress}
                            name="transferAddress"
                            onChange={this.onInputChange.bind(this)} placeholder="Address" />
-                    <span className="pure-form-message">This is a required field.</span>Send
-
                     <input
                         id="transferAmount"
                         type="number"
@@ -43,7 +40,6 @@ class WalletForm extends Component {
                         name="transferAmount"
                         onChange={this.onInputChange.bind(this)}
                         placeholder="Amount" />
-                    <span className="pure-form-message">This is a required field.</span>
 
                     <br />
 

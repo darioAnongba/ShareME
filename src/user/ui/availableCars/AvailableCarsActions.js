@@ -30,7 +30,6 @@ export function getAvailableCars(dispatch) {
 
                     return loanContractInstance.getAvailableCars(1);
                 }).then(function (result) {
-                    console.log(result);
                     // Transform to readable string
                     let res = [];
 
@@ -40,18 +39,17 @@ export function getAvailableCars(dispatch) {
                     });
 
                     result[1].forEach(function (el) {
-                        res[res.length - 1][1] = el.e;
+                        res[res.length - 1][1] = el.c[0];
                     });
 
                     result[2].forEach(function (el) {
-                        res[res.length - 1][2] = el.e;
+                        res[res.length - 1][2] = el.c[0];
                     });
 
                     result[3].forEach(function (el) {
-                        res[res.length - 1][3] = el.e;
+                        res[res.length - 1][3] = el.c[0];
                     });
 
-                    console.log(res);
 
                     dispatch({type: 'GET_AVAILABLE_CARS_SUCCESS', payload: res});
 

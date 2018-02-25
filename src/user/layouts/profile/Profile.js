@@ -14,7 +14,6 @@ class Profile extends Component {
                         <ProfileFormContainer />
 
                         <h1>My Cars</h1>
-                        <p>Manage your cars</p>
                         <ListCarsContainer />
 
                         <h1>Add a Car</h1>
