@@ -28,3 +28,12 @@ def get_user(request, address):
     user = Profile.objects.get(address=address)
     return JsonResponse(user.as_dict)
 
+def book_car(request, plate_number):
+    pick_up_location = request.POST['pick_up_location']
+    car = Car.objects.get(plate_number=plate_number)
+    car.pick_up_location = pick_up_location
+    car.save()
+
+    return JsonResponse(car.as_dict)
+
+

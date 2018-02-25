@@ -26,7 +26,7 @@ class Car(models.Model):
     nb_seats = models.IntegerField()
     nb_kms = models.IntegerField()
     picture_url = models.URLField()
-    pick_up_location = models.TextField()
+    pick_up_location = models.TextField(default="")
 
     @property
     def as_dict(self):

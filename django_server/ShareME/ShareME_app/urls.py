@@ -6,4 +6,5 @@ urlpatterns = [
     path('car/<plate_number>', views.get_car),
     path('car', views.add_car),
     path('user/<address>', views.get_user),
+    path('car/<plate_number>/book', views.book_car),
 ]

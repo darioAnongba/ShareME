@@ -2,6 +2,7 @@
 node_modules
 .idea
 *.pyc
+build/*
 __pycache__/
 django_server/django_env
 django_server/ShareME/ShareME_app/migrations
