@@ -45,7 +45,7 @@ class App extends Component {
                         <OnlyGuestLinks />
                         <OnlyAuthLinks />
                     </ul>
-                    <Link to="/" className="pure-menu-heading pure-menu-link">ShareME - Decentralized Car Sharing</Link>
+                    <Link to="/" className="pure-menu-heading pure-menu-link">ShareME</Link>
                 </nav>
 
                 {this.props.children}
