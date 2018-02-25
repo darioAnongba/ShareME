@@ -2,6 +2,7 @@ pragma solidity ^0.4.17;
 
 import './SharedStructs.sol';
 import './Authentication.sol';
+import './ShareMeToken.sol';
 
 contract Loan {
 
@@ -14,7 +15,7 @@ contract Loan {
         nbCars = 0;
     }
 
-    function addCar(bytes32 plateNumber) public payable returns (bool) {
+    function addCar(bytes32 plateNumber) public returns (bool) {
         if (cars[plateNumber].plateNumber == 0x0) {
             cars[plateNumber].plateNumber = plateNumber;
             cars[plateNumber].owner = msg.sender;
@@ -47,5 +48,17 @@ contract Loan {
         }
         
         return false;
+    }
+
+    function book(bytes32 plateNumber) public returns (bool) {
+        // Check if valid plateNumber and not yet taken
+        if (cars[plateNumber].plateNumber == 0x0 && !cars[plateNumber].taken) {
+            cars[plateNumber].taken = true;
+            // Here we assume this is always working
+            cars[plateNumber].owner.transfer(cars[plateNumber].price);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

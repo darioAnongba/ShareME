@@ -13,5 +13,6 @@ library SharedStructs {
         uint price;
         bytes32 plateNumber;
         address owner;
+        bool taken;
     }
 }
