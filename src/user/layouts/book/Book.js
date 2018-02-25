@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import AvailableCarsContainer from '../../ui/avilableCars/AvailableCarsContainer'
+import AvailableCarsContainer from '../../ui/availableCars/AvailableCarsContainer'
 
 class Book extends Component {
     render() {

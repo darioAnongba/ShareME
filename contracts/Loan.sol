@@ -65,7 +65,7 @@ contract Loan {
         }
     }
 
-    function getAvailableCars() public returns (bytes32[], uint[], uint[], uint[]) {
+    function getAvailableCars(uint k) public view returns (bytes32[], uint[], uint[], uint[]) {
         bytes32[] memory plates = new bytes32[](nbCars);
         uint[] memory startTimes = new uint[](nbCars);
         uint[] memory endTimes = new uint[](nbCars);

@@ -31,6 +31,7 @@ class Car(models.Model):
     @property
     def as_dict(self):
         to_return = {
+            "owner": self.owner.as_dict,
             "brand": self.brand,
             "plate_number": self.plate_number,
             "nb_seats": self.nb_seats,
@@ -45,5 +46,5 @@ class Car(models.Model):
         return sha256_encrypt_string("%s" % self)
 
     def __str__(self):
-        return "%s-%s-%s-%d-%d-%s-%s" % (self.owner, self.brand, self.plate_number, self.nb_seats, self.nb_kilometers, self.picture_url, self.pick_up_location)
+        return "%s-%s-%s-%d-%d-%s-%s" % (self.owner, self.brand, self.plate_number, self.nb_seats, self.nb_kms, self.picture_url, self.pick_up_location)
 

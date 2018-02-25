@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from ShareME_app.models import *
+from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
     return JsonResponse({'Hey': 'Look behind you!!!'})
@@ -9,6 +10,7 @@ def get_car(request, plate_number):
     car = Car.objects.get(plate_number=plate_number)
     return JsonResponse(car.as_dict)
 
+@csrf_exempt
 def add_car(request):
     user_address = request.POST['user_address']
     user_name = request.POST['user_name']
@@ -33,6 +35,7 @@ def get_user(request, address):
     user = Profile.objects.get(address=address)
     return JsonResponse(user.as_dict)
 
+@csrf_exempt
 def book_car(request, plate_number):
     pick_up_location = request.POST['pick_up_location']
     car = Car.objects.get(plate_number=plate_number)

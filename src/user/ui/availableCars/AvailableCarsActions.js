@@ -28,25 +28,33 @@ export function getAvailableCars(dispatch) {
                 loanContract.deployed().then(function(instance) {
                     loanContractInstance = instance;
 
-                    // Get balances
-                    return loanContractInstance.getAvailableCars();
+                    return loanContractInstance.getAvailableCars(1);
                 }).then(function (result) {
+                    console.log(result);
                     // Transform to readable string
                     let res = [];
-                    result.forEach(function (el) {
-                        console.log(el);
-                        let temp = {};
-                        temp['plate'] = web3.toUtf8(el[0]);
-                        temp['startTime'] = el[1];
-                        temp['endTime'] = el[2];
-                        temp['price'] = el[3];
-                        res.push(temp);
+
+                    result[0].forEach(function (el) {
+                        res.push([]);
+                        res[res.length - 1][0] = web3.toUtf8(el);
                     });
+
+                    result[1].forEach(function (el) {
+                        res[res.length - 1][1] = el.e;
+                    });
+
+                    result[2].forEach(function (el) {
+                        res[res.length - 1][2] = el.e;
+                    });
+
+                    result[3].forEach(function (el) {
+                        res[res.length - 1][3] = el.e;
+                    });
+
+                    console.log(res);
 
                     dispatch({type: 'GET_AVAILABLE_CARS_SUCCESS', payload: res});
 
-                }).catch(function (err) {
-                    console.log(err.message);
                 });
             })
         }
