@@ -3,8 +3,8 @@ import store from '../../../store'
 
 const contract = require('truffle-contract');
 
-export function getPlates(dispatch) {
-    console.log('Getting plates...');
+export function getAvailableCars(dispatch) {
+    console.log('Getting available cars...');
 
     let web3 = store.getState().web3.web3Instance;
 
@@ -28,16 +28,22 @@ export function getPlates(dispatch) {
                 loanContract.deployed().then(function(instance) {
                     loanContractInstance = instance;
 
-                    // Get Plates
-                    return loanContractInstance.getPlatesOf(accounts[0]);
+                    // Get balances
+                    return loanContractInstance.getAvailableCars(accounts[0]);
                 }).then(function (result) {
                     // Transform to readable string
-                    const decodedPlates = [];
+                    let res = [];
                     result.forEach(function (el) {
-                        decodedPlates.push(web3.toUtf8(el));
+                        let temp = {};
+                        temp['plate'] = web3.toUtf8(el[0]);
+                        temp['startTime'] = el[1];
+                        temp['endTime'] = el[2];
+                        temp['price'] = el[3];
+                        res.push(temp);
                     });
 
-                    dispatch({type: 'GET_PLATES_SUCCESS', payload: decodedPlates});
+                    dispatch({type: 'GET_AVAILABLE_CARS_SUCCESS', payload: res});
+
                 }).catch(function (err) {
                     console.log(err.message);
                 });

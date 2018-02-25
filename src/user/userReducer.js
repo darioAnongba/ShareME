@@ -31,6 +31,13 @@ const userReducer = (state = initialState, action) => {
         })
     }
 
+    if (action.type === 'GET_AVAILABLE_CARS_SUCCESS')
+    {
+        return Object.assign({}, state, {
+            availableCars: action.payload
+        })
+    }
+
     return state
 };
 

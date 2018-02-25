@@ -7,6 +7,7 @@ import './ShareMeToken.sol';
 contract Loan {
 
     mapping (bytes32 => SharedStructs.Car) public cars;
+    mapping (uint => bytes32) public carsIndex;
     mapping (address => bytes32[]) public ownedPlates;
     mapping (bytes32 => uint) public platesToVault;
     uint nbCars;
@@ -20,6 +21,7 @@ contract Loan {
             cars[plateNumber].plateNumber = plateNumber;
             cars[plateNumber].owner = msg.sender;
             ownedPlates[msg.sender].push(plateNumber);
+            carsIndex[nbCars] = plateNumber;
             nbCars = nbCars + 1;
             return true;
         }
@@ -60,5 +62,21 @@ contract Loan {
         } else {
             return false;
         }
+    }
+
+    function getAvailableCars() public returns (bytes32[], uint[], uint[], uint[]) {
+        bytes32[] memory plates = new bytes32[](nbCars);
+        uint[] memory startTimes = new uint[](nbCars);
+        uint[] memory endTimes = new uint[](nbCars);
+        uint[] memory prices = new uint[](nbCars);
+
+        for (uint i = 0; i < nbCars; i++) {
+            plates[i] = cars[carsIndex[i]].plateNumber;
+            startTimes[i] = cars[carsIndex[i]].startTime;
+            endTimes[i] = cars[carsIndex[i]].endTime;
+            prices[i] = cars[carsIndex[i]].price;
+        }
+
+        return (plates, startTimes, endTimes, prices);
     }
 }
