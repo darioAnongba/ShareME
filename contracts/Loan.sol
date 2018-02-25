@@ -23,6 +23,7 @@ contract Loan {
             ownedPlates[msg.sender].push(plateNumber);
             carsIndex[nbCars] = plateNumber;
             nbCars = nbCars + 1;
+
             return true;
         }
 
