@@ -24,6 +24,11 @@ contract Loan {
             carsIndex[nbCars] = plateNumber;
             nbCars = nbCars + 1;
 
+            //hardcoded for hackaton
+            cars[plateNumber].startTime = 1519455600;
+            cars[plateNumber].endTime = 1519543698;
+            cars[plateNumber].price = 20;
+
             return true;
         }
 
@@ -34,7 +39,7 @@ contract Loan {
         return ownedPlates[addr];
     }
 
-    function createBooking(bytes32 plateNumber, uint startTime, uint endTime, uint price) public returns (bool) {        
+    function createBooking(bytes32 plateNumber, uint startTime, uint endTime, uint price) public returns (bool) {
         if (ownedPlates[msg.sender].length > 0) {
             for (uint i = 0; i < ownedPlates[msg.sender].length; i++) {
                 if (ownedPlates[msg.sender][i] == plateNumber && cars[plateNumber].startTime == 0x0) {
@@ -49,7 +54,7 @@ contract Loan {
                 }
             }
         }
-        
+
         return false;
     }
 
