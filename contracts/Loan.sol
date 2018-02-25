@@ -7,6 +7,7 @@ contract Loan {
 
     mapping (bytes32 => SharedStructs.Car) public cars;
     mapping (address => bytes32[]) public ownedPlates;
+    mapping (bytes32 => uint) public platesToVault;
     uint nbCars;
 
     function Loan() {
@@ -14,15 +15,37 @@ contract Loan {
     }
 
     function addCar(bytes32 plateNumber) public payable returns (bool) {
-        cars[plateNumber].plateNumber = plateNumber;
-        cars[plateNumber].owner = msg.sender;
-        ownedPlates[msg.sender].push(plateNumber);
-        nbCars = nbCars + 1;
+        if (cars[plateNumber].plateNumber == 0x0) {
+            cars[plateNumber].plateNumber = plateNumber;
+            cars[plateNumber].owner = msg.sender;
+            ownedPlates[msg.sender].push(plateNumber);
+            nbCars = nbCars + 1;
+            return true;
+        }
 
-        return true;
+        return false;
     }
 
     function getPlates() public view returns (bytes32[]) {
         return ownedPlates[msg.sender];
+    }
+
+    function createBooking(bytes32 plateNumber, uint startTime, uint endTime, uint price) public returns (bool) {        
+        if (ownedPlates[msg.sender].length > 0) {
+            for (uint i = 0; i < ownedPlates[msg.sender].length; i++) {
+                if (ownedPlates[msg.sender][i] == plateNumber && cars[plateNumber].startTime == 0x0) {
+                    cars[plateNumber].startTime = startTime;
+                    cars[plateNumber].endTime = endTime;
+                    cars[plateNumber].price = price;
+
+                    // Deposit in vault
+                    platesToVault[plateNumber] += price;
+
+                    return true;
+                }
+            }
+        }
+        
+        return false;
     }
 }

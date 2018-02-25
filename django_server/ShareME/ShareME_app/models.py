@@ -20,14 +20,13 @@ class Profile(models.Model):
 
 
 class Car(models.Model):
-    booking_hash = models.TextField()
+    plate_number = models.TextField()
     owner = models.ForeignKey(Profile, on_delete=models.DO_NOTHING)
     brand = models.TextField()
-    plate_number = models.TextField()
     nb_seats = models.IntegerField()
     nb_kms = models.IntegerField()
     picture_url = models.URLField()
-    pick_up_location = models.TextField()
+    pick_up_location = models.TextField(default="")
 
     @property
     def as_dict(self):
