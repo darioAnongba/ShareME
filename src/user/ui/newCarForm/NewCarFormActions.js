@@ -24,6 +24,7 @@ export function addCar(fields) {
                     console.error(error);
                 }
 
+                console.log(fields);
                 loanContract.deployed().then(function(instance) {
                     loanContractInstance = instance;
 
