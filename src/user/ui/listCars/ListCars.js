@@ -14,7 +14,9 @@ class ListCars extends Component {
     render() {
         return(
             <ul>
-                <li>{this.props.plates}</li>
+                {this.props.plates && this.props.plates.map(function (plateNumber, index) {
+                    return <li key={ index }>{plateNumber}</li>
+                })}
             </ul>
         )
     }

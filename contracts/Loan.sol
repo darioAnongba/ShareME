@@ -21,6 +21,7 @@ contract Loan {
             cars[plateNumber].owner = msg.sender;
             ownedPlates[msg.sender].push(plateNumber);
             nbCars = nbCars + 1;
+
             return true;
         }
 

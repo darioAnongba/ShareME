@@ -24,17 +24,12 @@ export function addCar(fields) {
                     console.error(error);
                 }
 
-                console.log(fields);
                 loanContract.deployed().then(function(instance) {
                     loanContractInstance = instance;
 
                     return loanContractInstance.addCar(web3.fromUtf8(fields.plateNumber), {from: accounts[0]})
                 }).then(function (success) {
-                    if (success) {
-                        alert('Car added successfully !');
-                    } else {
-                        alert('This plate number already exists in the blockchain');
-                    }
+                    alert('Car added successfully !');
 
                     return {
                       type: CAR_ADDED

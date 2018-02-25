@@ -29,7 +29,7 @@ export function getPlates(dispatch) {
                     loanContractInstance = instance;
 
                     // Get Plates
-                    return loanContractInstance.getPlates(accounts[0]);
+                    return loanContractInstance.getPlatesOf(accounts[0]);
                 }).then(function (result) {
                     // Transform to readable string
                     const decodedPlates = [];
