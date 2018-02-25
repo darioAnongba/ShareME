@@ -29,11 +29,12 @@ export function getAvailableCars(dispatch) {
                     loanContractInstance = instance;
 
                     // Get balances
-                    return loanContractInstance.getAvailableCars(accounts[0]);
+                    return loanContractInstance.getAvailableCars();
                 }).then(function (result) {
                     // Transform to readable string
                     let res = [];
                     result.forEach(function (el) {
+                        console.log(el);
                         let temp = {};
                         temp['plate'] = web3.toUtf8(el[0]);
                         temp['startTime'] = el[1];
