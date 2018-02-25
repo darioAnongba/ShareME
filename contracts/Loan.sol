@@ -7,6 +7,7 @@ contract Loan {
 
     mapping (bytes32 => SharedStructs.Car) public cars;
     mapping (address => bytes32[]) public ownedPlates;
+    mapping (bytes32 => uint) public platesToVault;
     uint nbCars;
 
     function Loan() {
@@ -36,6 +37,10 @@ contract Loan {
                     cars[plateNumber].startTime = startTime;
                     cars[plateNumber].endTime = endTime;
                     cars[plateNumber].price = price;
+
+                    // Deposit in vault
+                    platesToVault[plateNumber] += price;
+
                     return true;
                 }
             }
